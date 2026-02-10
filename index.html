@@ -20,23 +20,21 @@
 
 
         :root {
-            /* Colori tema cyberpunk neon */
-            --color-bg: #0a0a0f;
-            --color-bg-secondary: #12121a;
-            --color-primary: #bf40bf;
-            --color-secondary: #4a90e2;
-            --color-accent: #ff006e;
-            --color-text: #e0e0ff;
-            --color-text-muted: #a0a0c0;
+            /* Colori tema professionale */
+            --color-bg: #0f1419;
+            --color-bg-secondary: #1a1f2e;
+            --color-primary: #3b82f6;
+            --color-secondary: #60a5fa;
+            --color-accent: #2563eb;
+            --color-text: #e2e8f0;
+            --color-text-muted: #94a3b8;
             
             /* Gradienti */
-            --gradient-main: linear-gradient(135deg, #bf40bf 0%, #4a90e2 50%, #ff006e 100%);
-            --gradient-card: linear-gradient(135deg, rgba(191, 64, 191, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%);
+            --gradient-main: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --gradient-card: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
             
             /* Glow effects */
-            --glow-purple: 0 0 20px rgba(191, 64, 191, 0.5), 0 0 40px rgba(191, 64, 191, 0.3);
-            --glow-blue: 0 0 20px rgba(74, 144, 226, 0.5), 0 0 40px rgba(74, 144, 226, 0.3);
-            --glow-pink: 0 0 20px rgba(255, 0, 110, 0.5), 0 0 40px rgba(255, 0, 110, 0.3);
+            --glow-blue: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 30px rgba(59, 130, 246, 0.15);
         }
 
 
@@ -61,11 +59,11 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(18, 18, 26, 0.8);
+            background: rgba(26, 31, 46, 0.8);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             z-index: 1000;
-            border-bottom: 1px solid rgba(191, 64, 191, 0.2);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
         }
 
 
@@ -124,7 +122,7 @@
 
         nav a:hover {
             color: var(--color-primary);
-            text-shadow: var(--glow-purple);
+            text-shadow: var(--glow-blue);
         }
 
 
@@ -168,9 +166,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(191, 64, 191, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
             animation: gradientShift 15s ease infinite;
         }
 
@@ -198,7 +195,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 80px rgba(191, 64, 191, 0.5);
+            text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
             
             /* EFFETTO ZOOM SPETTACOLARE */
             animation: zoomExplosion 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -209,7 +206,7 @@
                 opacity: 0;
                 transform: scale(0) rotate(-180deg);
                 filter: blur(30px) brightness(3);
-                text-shadow: 0 0 100px rgba(191, 64, 191, 1);
+                text-shadow: 0 0 100px rgba(59, 130, 246, 0.8);
             }
             40% {
                 opacity: 1;
@@ -226,7 +223,7 @@
                 opacity: 1;
                 transform: scale(1) rotate(0deg);
                 filter: blur(0) brightness(1);
-                text-shadow: 0 0 80px rgba(191, 64, 191, 0.5);
+                text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
             }
         }
 
@@ -250,14 +247,14 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             animation: fadeInUp 1s ease 0.8s backwards, pulse 2s ease 1.5s infinite;
-            box-shadow: var(--glow-purple);
+            box-shadow: var(--glow-blue);
             border: 2px solid transparent;
         }
 
 
         .cta-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 30px rgba(191, 64, 191, 0.8), 0 0 60px rgba(191, 64, 191, 0.5);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
         }
 
 
@@ -275,10 +272,10 @@
 
         @keyframes pulse {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(191, 64, 191, 0.5), 0 0 40px rgba(191, 64, 191, 0.3);
+                box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 30px rgba(59, 130, 246, 0.15);
             }
             50% {
-                box-shadow: 0 0 30px rgba(191, 64, 191, 0.8), 0 0 60px rgba(191, 64, 191, 0.5);
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
             }
         }
 
@@ -344,7 +341,7 @@
             border-radius: 20px;
             background: var(--gradient-card);
             border: 3px solid var(--color-primary);
-            box-shadow: var(--glow-purple);
+            box-shadow: var(--glow-blue);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -353,8 +350,6 @@
             position: relative;
             overflow: hidden;
         }
-
-
 
 
         @keyframes float {
@@ -372,15 +367,17 @@
 
 
         /* ========================================
-           SKILLS SECTION
+           SKILLS SECTION - RIMPICCIOLITA
         ======================================== */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.2rem;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
 
@@ -393,9 +390,9 @@
         .skill-card {
             background: var(--gradient-card);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(191, 64, 191, 0.3);
-            border-radius: 15px;
-            padding: 2rem 1rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem 0.8rem;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -403,15 +400,15 @@
 
 
         .skill-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: var(--glow-purple);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: var(--glow-blue);
             border-color: var(--color-primary);
         }
 
 
         .skill-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
             display: block;
         }
 
@@ -419,12 +416,12 @@
         .skill-name {
             font-weight: 600;
             color: var(--color-text);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
 
         /* ========================================
-           PROJECTS SECTION - MOCKUP PROFESSIONALI
+           PROJECTS SECTION - NUOVI PROGETTI
         ======================================== */
         .projects-grid {
             display: grid;
@@ -445,7 +442,7 @@
         .project-card {
             background: var(--gradient-card);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(191, 64, 191, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -455,7 +452,7 @@
 
         .project-card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 20px 60px rgba(191, 64, 191, 0.4);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
             border-color: var(--color-primary);
         }
 
@@ -470,110 +467,84 @@
             overflow: hidden;
         }
 
-        /* Mockup Portfolio */
-        .project-image.portfolio-mockup {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-
-        .portfolio-mockup::after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 3px;
-            background: var(--color-primary);
-            top: 25%;
-            left: 20%;
-            box-shadow: 0 0 10px var(--color-primary);
-        }
-
-        .portfolio-mockup::before {
-            content: '';
-            position: absolute;
-            width: 40%;
-            height: 50px;
-            background: rgba(191, 64, 191, 0.2);
-            border: 2px solid var(--color-primary);
-            border-radius: 10px;
-            top: 40%;
-            left: 30%;
-            box-shadow: 0 0 20px rgba(191, 64, 191, 0.4);
-        }
-
-        /* Mockup Salone */
-        .project-image.salon-mockup {
-            background: linear-gradient(135deg, #ff6b9d 20%, #c06c84 100%);
-        }
-
-        .salon-mockup::after {
-            content: '✂';
-            position: absolute;
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.3);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Mockup Landing Page Milano */
-        .project-image.landing-mockup {
+        /* Mockup Sito Psicologa */
+        .project-image.psicologa-mockup {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .landing-mockup::before {
-            content: '';
+        .psicologa-mockup::after {
+            content: '🧠';
             position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 215, 0, 0.3);
-            border-radius: 50%;
-            top: 20px;
-            right: 30px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: pulse 3s ease infinite;
         }
 
-        .landing-mockup::after {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            bottom: 40px;
-            left: 30px;
+        /* Mockup Sito Veterinario */
+        .project-image.veterinario-mockup {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
 
-        /* Mockup Dashboard Gaming */
-        .project-image.dashboard-mockup {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+        .veterinario-mockup::after {
+            content: '🐾';
+            position: absolute;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.25);
+            top: 30%;
+            left: 30%;
         }
 
-        .dashboard-mockup::before {
-            content: '';
+        .veterinario-mockup::before {
+            content: '🐾';
             position: absolute;
-            width: 70%;
-            height: 60%;
-            background: 
-                repeating-linear-gradient(90deg, rgba(0, 255, 136, 0.1) 0px, rgba(0, 255, 136, 0.1) 20px, transparent 20px, transparent 40px),
-                repeating-linear-gradient(0deg, rgba(74, 144, 226, 0.1) 0px, rgba(74, 144, 226, 0.1) 20px, transparent 20px, transparent 40px);
-            border: 2px solid rgba(0, 255, 136, 0.3);
-            border-radius: 10px;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.15);
+            bottom: 25%;
+            right: 25%;
+            transform: rotate(45deg);
         }
 
-        .dashboard-mockup::after {
-            content: '';
+        /* Mockup Sito Gioielli */
+        .project-image.gioielli-mockup {
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 50%, #d4af37 100%);
+        }
+
+        .gioielli-mockup::after {
+            content: '💎';
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 0, 110, 0.5);
-            border-radius: 50%;
-            bottom: 20px;
-            right: 20px;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.8);
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.3);
+            animation: sparkle 2s ease infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+        }
+
+        /* Mockup Sito Bar */
+        .project-image.bar-mockup {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        }
+
+        .bar-mockup::before {
+            content: '🍸';
+            position: absolute;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.25);
+            top: 25%;
+            left: 20%;
+            transform: rotate(-15deg);
+        }
+
+        .bar-mockup::after {
+            content: '🍹';
+            position: absolute;
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            bottom: 25%;
+            right: 20%;
+            transform: rotate(15deg);
         }
 
         /* Effetto shine su hover */
@@ -623,12 +594,12 @@
 
 
         .tech-tag {
-            background: rgba(191, 64, 191, 0.2);
+            background: rgba(59, 130, 246, 0.15);
             color: var(--color-primary);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
-            border: 1px solid rgba(191, 64, 191, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
 
@@ -642,7 +613,7 @@
 
         .project-link:hover {
             color: var(--color-primary);
-            text-shadow: var(--glow-purple);
+            text-shadow: var(--glow-blue);
         }
 
 
@@ -668,7 +639,7 @@
         .contact-form {
             background: var(--gradient-card);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(191, 64, 191, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 20px;
             padding: 2rem;
         }
@@ -691,8 +662,8 @@
         .form-group textarea {
             width: 100%;
             padding: 1rem;
-            background: rgba(18, 18, 26, 0.6);
-            border: 1px solid rgba(191, 64, 191, 0.3);
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 10px;
             color: var(--color-text);
             font-family: 'Space Grotesk', sans-serif;
@@ -704,7 +675,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--color-primary);
-            box-shadow: var(--glow-purple);
+            box-shadow: var(--glow-blue);
         }
 
 
@@ -725,13 +696,13 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: var(--glow-purple);
+            box-shadow: var(--glow-blue);
         }
 
 
         .submit-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(191, 64, 191, 0.8);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
         }
 
 
@@ -745,7 +716,7 @@
         .contact-method {
             background: var(--gradient-card);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(191, 64, 191, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 15px;
             padding: 1.5rem;
             transition: all 0.3s ease;
@@ -754,7 +725,7 @@
 
         .contact-method:hover {
             transform: translateX(10px);
-            box-shadow: var(--glow-purple);
+            box-shadow: var(--glow-blue);
         }
 
 
@@ -787,7 +758,7 @@
         ======================================== */
         footer {
             background: var(--color-bg-secondary);
-            border-top: 1px solid rgba(191, 64, 191, 0.3);
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
             padding: 2rem;
             text-align: center;
         }
@@ -812,7 +783,7 @@
         .social-icon:hover {
             color: var(--color-primary);
             transform: translateY(-5px) rotate(10deg);
-            text-shadow: var(--glow-purple);
+            text-shadow: var(--glow-blue);
         }
 
 
@@ -841,7 +812,7 @@
         .cursor-follower {
             width: 40px;
             height: 40px;
-            border: 1px solid rgba(191, 64, 191, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.5);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
@@ -861,7 +832,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: rgba(18, 18, 26, 0.98);
+                background: rgba(26, 31, 46, 0.98);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -980,7 +951,7 @@
             <div class="about-text">
                 <p>Sono Dafne, appassionata di web design e sviluppo frontend</p>
                 <p>Sto imparando HTML, CSS e JavaScript per trasformare idee creative in piacevoli siti</p>
-                <p>Questo sito non è ancora un portfolio, è il mio primo lavoro che combina estetica cyberpunk e funzionalità moderne</p>
+                <p>Questo sito non è ancora un portfolio, è il mio primo lavoro che combina estetica moderna e funzionalità professionali</p>
             </div>
         </div>
     </section>
@@ -1008,11 +979,11 @@
             </div>
             <div class="skill-card">
                 <span class="skill-icon">📱</span>
-                <div class="skill-name">Responsive Design</div>
+                <div class="skill-name">Responsive</div>
             </div>
             <div class="skill-card">
                 <span class="skill-icon">🎭</span>
-                <div class="skill-name">Figma Basics</div>
+                <div class="skill-name">Figma</div>
             </div>
         </div>
     </section>
@@ -1023,69 +994,69 @@
         <h2 class="section-title">I Miei Progetti</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <div class="project-image portfolio-mockup">
+                <div class="project-image psicologa-mockup">
                     <div class="shine"></div>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">Animated Portfolio</h3>
-                    <p class="project-description">Portfolio personale con animazioni fluide, effetti neon e design cyberpunk per mostrare i miei lavori.</p>
+                    <h3 class="project-title">Sito Psicologa</h3>
+                    <p class="project-description">Sito web professionale per studio di psicologia con sezioni informative, area prenotazioni e blog integrato.</p>
                     <div class="project-tech">
                         <span class="tech-tag">HTML</span>
                         <span class="tech-tag">CSS</span>
                         <span class="tech-tag">JavaScript</span>
                     </div>
-                    <a href="#" class="project-link">Vedi progetto →</a>
+                    <a href="https://dafne-psicologa.example.com" class="project-link" target="_blank">Vedi progetto →</a>
                 </div>
             </div>
 
 
             <div class="project-card">
-                <div class="project-image salon-mockup">
+                <div class="project-image veterinario-mockup">
                     <div class="shine"></div>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">Sito Parrucchiere</h3>
-                    <p class="project-description">Landing page per un salone di bellezza moderno con booking form e galleria immagini interattiva.</p>
+                    <h3 class="project-title">Sito Veterinario</h3>
+                    <p class="project-description">Portale completo per clinica veterinaria con sistema di prenotazioni online, galleria servizi e consigli per pet.</p>
                     <div class="project-tech">
                         <span class="tech-tag">HTML</span>
                         <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Animations</span>
+                        <span class="tech-tag">Forms</span>
                     </div>
-                    <a href="#" class="project-link">Vedi progetto →</a>
+                    <a href="https://dafne-veterinario.example.com" class="project-link" target="_blank">Vedi progetto →</a>
                 </div>
             </div>
 
 
             <div class="project-card">
-                <div class="project-image landing-mockup">
+                <div class="project-image gioielli-mockup">
                     <div class="shine"></div>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">Landing Page Milano</h3>
-                    <p class="project-description">Pagina promozionale per eventi a Milano con mappa interattiva e countdown timer animato.</p>
+                    <h3 class="project-title">Sito Artigianale Gioielli</h3>
+                    <p class="project-description">E-commerce elegante per gioielli artigianali con galleria fotografica professionale e carrello acquisti.</p>
                     <div class="project-tech">
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">CSS Grid</span>
-                        <span class="tech-tag">APIs</span>
+                        <span class="tech-tag">Animations</span>
                     </div>
-                    <a href="#" class="project-link">Vedi progetto →</a>
+                    <a href="https://dafne-gioielli.example.com" class="project-link" target="_blank">Vedi progetto →</a>
                 </div>
             </div>
 
 
             <div class="project-card">
-                <div class="project-image dashboard-mockup">
+                <div class="project-image bar-mockup">
                     <div class="shine"></div>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">Gaming Dashboard</h3>
-                    <p class="project-description">Dashboard concept per gamers con statistiche live, design futuristico e effetti glow pulsanti.</p>
+                    <h3 class="project-title">Sito Bar</h3>
+                    <p class="project-description">Landing page moderna per cocktail bar con menu interattivo, eventi in programma e sistema di prenotazione tavoli.</p>
                     <div class="project-tech">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Charts</span>
-                        <span class="tech-tag">Glassmorphism</span>
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">Animations</span>
+                        <span class="tech-tag">Responsive</span>
                     </div>
-                    <a href="#" class="project-link">Vedi progetto →</a>
+                    <a href="https://dafne-bar.example.com" class="project-link" target="_blank">Vedi progetto →</a>
                 </div>
             </div>
         </div>
@@ -1147,7 +1118,7 @@
             <a href="https://github.com/Dafne5342" class="social-icon" target="_blank">🔗</a>
             <a href="https://www.linkedin.com/in/dafne-bettera-1367711a2" class="social-icon" target="_blank">💼</a>
         </div>
-        <p class="copyright">&copy; 2026 Dafne - Frontend Developer </p>Fatto con 💜 a Milano</p>
+        <p class="copyright">&copy; 2026 Dafne - Frontend Developer | Fatto con 💙 a Milano</p>
     </footer>
 
 
@@ -1271,10 +1242,10 @@
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(18, 18, 26, 0.95)';
-                nav.style.boxShadow = '0 5px 20px rgba(191, 64, 191, 0.3)';
+                nav.style.background = 'rgba(26, 31, 46, 0.95)';
+                nav.style.boxShadow = '0 5px 20px rgba(59, 130, 246, 0.2)';
             } else {
-                nav.style.background = 'rgba(18, 18, 26, 0.8)';
+                nav.style.background = 'rgba(26, 31, 46, 0.8)';
                 nav.style.boxShadow = 'none';
             }
         });
@@ -1305,8 +1276,8 @@
         // ========================================
         // CONSOLE MESSAGE
         // ========================================
-        console.log('%c💜 Ciao! Benvenuto nel mio portfolio 💜', 'color: #bf40bf; font-size: 20px; font-weight: bold;');
-        console.log('%c👩‍💻 Sviluppato con passione da Dafne', 'color: #4a90e2; font-size: 14px;');
+        console.log('%c💙 Ciao! Benvenuto nel mio portfolio 💙', 'color: #3b82f6; font-size: 20px; font-weight: bold;');
+        console.log('%c👩‍💻 Sviluppato con passione da Dafne', 'color: #60a5fa; font-size: 14px;');
     </script>
 
     <!-- ====================== -->
@@ -1330,13 +1301,13 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(191, 64, 191, 0.25);
+            background: rgba(59, 130, 246, 0.2);
             border: 2px solid var(--color-primary);
             color: var(--color-primary);
             font-size: 1.6rem;
             cursor: pointer;
             backdrop-filter: blur(8px);
-            box-shadow: var(--glow-purple);
+            box-shadow: var(--glow-blue);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -1345,17 +1316,17 @@
 
         #musicToggle:hover {
             transform: scale(1.15);
-            box-shadow: 0 0 30px rgba(191, 64, 191, 0.7);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
         }
 
         #musicToggle.playing {
-            background: rgba(191, 64, 191, 0.5);
+            background: rgba(59, 130, 246, 0.4);
             animation: pulse-slow 3s infinite;
         }
 
         @keyframes pulse-slow {
-            0%, 100% { box-shadow: 0 0 20px rgba(191, 64, 191, 0.5); }
-            50%      { box-shadow: 0 0 40px rgba(191, 64, 191, 0.8); }
+            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+            50%      { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
         }
 
         @media (max-width: 768px) {
