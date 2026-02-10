@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dafne - Frontend Developer | Milano</title>
+    <title>DAFNE_TERMINAL // PORTFOLIO_v2.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
     
     <style>
         /* ========================================
-           RESET E VARIABILI GLOBALI
+           RESET E VARIABILI
         ======================================== */
         * {
             margin: 0;
@@ -18,115 +18,170 @@
             box-sizing: border-box;
         }
 
-
         :root {
-            /* Colori tema professionale */
-            --color-bg: #0f1419;
-            --color-bg-secondary: #1a1f2e;
-            --color-primary: #3b82f6;
-            --color-secondary: #60a5fa;
-            --color-accent: #2563eb;
-            --color-text: #e2e8f0;
-            --color-text-muted: #94a3b8;
-            
-            /* Gradienti */
-            --gradient-main: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            --gradient-card: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
-            
-            /* Glow effects */
-            --glow-blue: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 30px rgba(59, 130, 246, 0.15);
+            --color-bg: #000000;
+            --color-fg: #ffffff;
+            --color-primary: #00ff00;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-terminal: 'VT323', monospace;
         }
-
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
         }
-
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-mono);
             background-color: var(--color-bg);
-            color: var(--color-text);
+            color: var(--color-fg);
             line-height: 1.6;
             overflow-x: hidden;
+            cursor: none;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
         }
 
+        /* ========================================
+           MATRIX BACKGROUND CANVAS
+        ======================================== */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+        }
 
         /* ========================================
-           NAVIGATION BAR
+           SCANLINE EFFECT
+        ======================================== */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+            animation: scanline-move 8s linear infinite;
+        }
+
+        @keyframes scanline-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(10px); }
+        }
+
+        /* ========================================
+           CUSTOM CURSOR - PAROLE CHE SI COMPONGONO
+        ======================================== */
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-fg);
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            transition: opacity 0.3s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--color-fg);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        /* ========================================
+           NAVIGATION - STILE TERMINALE
         ======================================== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 31, 46, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
             padding: 1rem 2rem;
             z-index: 1000;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            border-bottom: 2px solid var(--color-fg);
+            font-family: var(--font-terminal);
         }
 
-
         nav .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-
         nav .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            font-weight: 900;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            animation: glitch-logo 5s infinite;
         }
 
+        @keyframes glitch-logo {
+            0%, 90%, 100% { 
+                text-shadow: none;
+            }
+            92% {
+                text-shadow: 2px 0 #ff0000, -2px 0 #00ffff;
+                transform: translate(-2px, 0);
+            }
+            94% {
+                text-shadow: -2px 0 #ff0000, 2px 0 #00ffff;
+                transform: translate(2px, 0);
+            }
+        }
 
         nav ul {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
             list-style: none;
+            font-size: 1.3rem;
         }
 
-
         nav a {
-            color: var(--color-text);
+            color: var(--color-fg);
             text-decoration: none;
-            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
         }
 
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-main);
-            transition: width 0.3s ease;
+        nav a::before {
+            content: '> ';
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-
-        nav a:hover::after {
-            width: 100%;
+        nav a:hover::before {
+            opacity: 1;
         }
-
 
         nav a:hover {
-            color: var(--color-primary);
-            text-shadow: var(--glow-blue);
+            letter-spacing: 2px;
         }
 
-
-        /* Hamburger menu mobile */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -134,18 +189,14 @@
             gap: 5px;
         }
 
-
         .menu-toggle span {
             width: 25px;
-            height: 3px;
-            background: var(--color-primary);
-            border-radius: 3px;
-            transition: all 0.3s ease;
+            height: 2px;
+            background: var(--color-fg);
         }
 
-
         /* ========================================
-           HERO SECTION
+           HERO SECTION - GLITCH DAFNE
         ======================================== */
         .hero {
             min-height: 100vh;
@@ -153,616 +204,600 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
             padding: 2rem;
         }
 
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+        }
 
-        /* Sfondo animato con particelle */
-        .hero::before {
-            content: '';
+        .hero h1 {
+            font-family: var(--font-terminal);
+            font-size: clamp(4rem, 15vw, 10rem);
+            font-weight: bold;
+            letter-spacing: 10px;
+            position: relative;
+            animation: glitch-text 1s ease-in-out infinite alternate;
+        }
+
+        /* EFFETTO GLITCH DAFNE */
+        @keyframes glitch-text {
+            0% {
+                text-shadow: 
+                    3px 3px 0 rgba(255, 255, 255, 0.1),
+                    -3px -3px 0 rgba(255, 255, 255, 0.1);
+            }
+            25% {
+                text-shadow: 
+                    -3px 3px 0 rgba(255, 255, 255, 0.2),
+                    3px -3px 0 rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    3px -3px 0 rgba(255, 255, 255, 0.15),
+                    -3px 3px 0 rgba(255, 255, 255, 0.15);
+            }
+            75% {
+                text-shadow: 
+                    -3px -3px 0 rgba(255, 255, 255, 0.1),
+                    3px 3px 0 rgba(255, 255, 255, 0.1);
+            }
+            100% {
+                text-shadow: 
+                    3px 3px 0 rgba(255, 255, 255, 0.05),
+                    -3px -3px 0 rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .hero h1::before,
+        .hero h1::after {
+            content: 'DAFNE';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
-            animation: gradientShift 15s ease infinite;
+            opacity: 0.8;
         }
 
-
-        @keyframes gradientShift {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
+        .hero h1::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff0000;
+            animation: glitch-anim-1 0.3s infinite linear alternate-reverse;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
         }
 
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 800px;
+        .hero h1::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+            clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
         }
 
-
-        .hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
-            
-            /* EFFETTO ZOOM SPETTACOLARE */
-            animation: zoomExplosion 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        @keyframes glitch-anim-1 {
+            0% { clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%); }
+            10% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); }
+            20% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
+            30% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); }
+            40% { clip-path: polygon(0 35%, 100% 35%, 100% 35%, 0 35%); }
+            50% { clip-path: polygon(0 45%, 100% 45%, 100% 46%, 0 46%); }
+            60% { clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%); }
+            70% { clip-path: polygon(0 70%, 100% 70%, 100% 71%, 0 71%); }
+            80% { clip-path: polygon(0 80%, 100% 80%, 100% 75%, 0 75%); }
+            90% { clip-path: polygon(0 12%, 100% 12%, 100% 15%, 0 15%); }
+            100% { clip-path: polygon(0 25%, 100% 25%, 100% 22%, 0 22%); }
         }
 
-        @keyframes zoomExplosion {
-            0% {
-                opacity: 0;
-                transform: scale(0) rotate(-180deg);
-                filter: blur(30px) brightness(3);
-                text-shadow: 0 0 100px rgba(59, 130, 246, 0.8);
-            }
-            40% {
-                opacity: 1;
-                transform: scale(1.4) rotate(10deg);
-                filter: blur(5px) brightness(1.5);
-            }
-            60% {
-                transform: scale(0.9) rotate(-5deg);
-            }
-            80% {
-                transform: scale(1.05) rotate(2deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-                filter: blur(0) brightness(1);
-                text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
-            }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); }
+            10% { clip-path: polygon(0 75%, 100% 75%, 100% 76%, 0 76%); }
+            20% { clip-path: polygon(0 54%, 100% 54%, 100% 44%, 0 44%); }
+            30% { clip-path: polygon(0 45%, 100% 45%, 100% 50%, 0 50%); }
+            40% { clip-path: polygon(0 14%, 100% 14%, 100% 33%, 0 33%); }
+            50% { clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); }
+            60% { clip-path: polygon(0 65%, 100% 65%, 100% 60%, 0 60%); }
+            70% { clip-path: polygon(0 75%, 100% 75%, 100% 85%, 0 85%); }
+            80% { clip-path: polygon(0 25%, 100% 25%, 100% 26%, 0 26%); }
+            90% { clip-path: polygon(0 65%, 100% 65%, 100% 40%, 0 40%); }
+            100% { clip-path: polygon(0 95%, 100% 95%, 100% 96%, 0 96%); }
         }
 
-
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--color-text-muted);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.5s backwards;
+        .typing-text {
+            font-family: var(--font-mono);
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin: 2rem 0;
+            min-height: 2rem;
+            display: inline-block;
         }
 
+        .typing-text::after {
+            content: '█';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--gradient-main);
-            color: white;
+            padding: 1rem 3rem;
+            background: transparent;
+            color: var(--color-fg);
             text-decoration: none;
-            border-radius: 50px;
+            border: 2px solid var(--color-fg);
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-family: var(--font-terminal);
+            letter-spacing: 3px;
             transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.8s backwards, pulse 2s ease 1.5s infinite;
-            box-shadow: var(--glow-blue);
-            border: 2px solid transparent;
-        }
-
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
-        }
-
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 30px rgba(59, 130, 246, 0.15);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
-            }
-        }
-
-
-        /* ========================================
-           SEZIONI GENERALI
-        ======================================== */
-        section {
-            padding: clamp(3rem, 8vw, 6rem) 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3rem);
-            text-align: center;
-            margin-bottom: 3rem;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--gradient-main);
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-
-
-        /* ========================================
-           ABOUT SECTION
-        ======================================== */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-
-        .about-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        .avatar {
-            width: 100%;
-            max-width: 300px;
-            aspect-ratio: 1;
-            border-radius: 20px;
-            background: var(--gradient-card);
-            border: 3px solid var(--color-primary);
-            box-shadow: var(--glow-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            animation: float 3s ease-in-out infinite;
+            margin-top: 2rem;
             position: relative;
             overflow: hidden;
         }
 
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-
-        .about-text p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            line-height: 1.8;
-            color: var(--color-text-muted);
-            margin-bottom: 1rem;
-        }
-
-
-        /* ========================================
-           SKILLS SECTION - RIMPICCIOLITA
-        ======================================== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1.2rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-
-        .skills-grid.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        .skill-card {
-            background: var(--gradient-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            padding: 1.2rem 0.8rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: var(--glow-blue);
-            border-color: var(--color-primary);
-        }
-
-
-        .skill-icon {
-            font-size: 2rem;
-            margin-bottom: 0.6rem;
-            display: block;
-        }
-
-
-        .skill-name {
-            font-weight: 600;
-            color: var(--color-text);
-            font-size: 0.9rem;
-        }
-
-
-        /* ========================================
-           PROJECTS SECTION - NUOVI PROGETTI
-        ======================================== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-
-        .projects-grid.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        .project-card {
-            background: var(--gradient-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-
-        .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
-            border-color: var(--color-primary);
-        }
-
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Mockup Sito Psicologa */
-        .project-image.psicologa-mockup {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .psicologa-mockup::after {
-            content: '🧠';
-            position: absolute;
-            font-size: 5rem;
-            color: rgba(255, 255, 255, 0.2);
-            animation: pulse 3s ease infinite;
-        }
-
-        /* Mockup Sito Veterinario */
-        .project-image.veterinario-mockup {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
-
-        .veterinario-mockup::after {
-            content: '🐾';
-            position: absolute;
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.25);
-            top: 30%;
-            left: 30%;
-        }
-
-        .veterinario-mockup::before {
-            content: '🐾';
-            position: absolute;
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.15);
-            bottom: 25%;
-            right: 25%;
-            transform: rotate(45deg);
-        }
-
-        /* Mockup Sito Gioielli */
-        .project-image.gioielli-mockup {
-            background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 50%, #d4af37 100%);
-        }
-
-        .gioielli-mockup::after {
-            content: '💎';
-            position: absolute;
-            font-size: 5rem;
-            color: rgba(255, 255, 255, 0.3);
-            animation: sparkle 2s ease infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
-        }
-
-        /* Mockup Sito Bar */
-        .project-image.bar-mockup {
-            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
-        }
-
-        .bar-mockup::before {
-            content: '🍸';
-            position: absolute;
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.25);
-            top: 25%;
-            left: 20%;
-            transform: rotate(-15deg);
-        }
-
-        .bar-mockup::after {
-            content: '🍹';
-            position: absolute;
-            font-size: 3.5rem;
-            color: rgba(255, 255, 255, 0.2);
-            bottom: 25%;
-            right: 20%;
-            transform: rotate(15deg);
-        }
-
-        /* Effetto shine su hover */
-        .project-image .shine {
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-            z-index: 10;
+            background: var(--color-fg);
+            transition: left 0.3s ease;
+            z-index: -1;
         }
 
-        .project-card:hover .project-image .shine {
-            left: 100%;
+        .cta-button:hover::before {
+            left: 0;
         }
 
+        .cta-button:hover {
+            color: var(--color-bg);
+        }
+
+        /* ========================================
+           SEZIONI GENERALI
+        ======================================== */
+        section {
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: var(--font-terminal);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 5px;
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '//';
+            margin-right: 1rem;
+            opacity: 0.5;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 200px;
+            height: 2px;
+            background: var(--color-fg);
+            margin: 1rem auto;
+        }
+
+        /* ========================================
+           ABOUT SECTION
+        ======================================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+            border: 2px solid var(--color-fg);
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .terminal-box {
+            border: 2px solid var(--color-fg);
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            font-family: var(--font-mono);
+        }
+
+        .terminal-box::before {
+            content: 'USER_PROFILE.sh';
+            display: block;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--color-fg);
+            margin: -1rem -1rem 1rem -1rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .avatar-terminal {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 2px solid var(--color-fg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-terminal img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .about-text {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .about-text p::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           SKILLS SECTION - TERMINAL STYLE
+        ======================================== */
+        .skills-terminal {
+            border: 2px solid var(--color-fg);
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            font-family: var(--font-mono);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skills-terminal::before {
+            content: 'root@dafne:~$ cat skills.txt';
+            display: block;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--color-fg);
+            margin: -2rem -2rem 2rem -2rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-bar {
+            width: 200px;
+            height: 10px;
+            border: 1px solid var(--color-fg);
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--color-fg);
+            animation: skill-load 2s ease-out forwards;
+        }
+
+        .skill-item:nth-child(1) .skill-bar::after { width: 90%; }
+        .skill-item:nth-child(2) .skill-bar::after { width: 85%; }
+        .skill-item:nth-child(3) .skill-bar::after { width: 75%; }
+        .skill-item:nth-child(4) .skill-bar::after { width: 70%; }
+        .skill-item:nth-child(5) .skill-bar::after { width: 80%; }
+        .skill-item:nth-child(6) .skill-bar::after { width: 65%; }
+
+        @keyframes skill-load {
+            from { width: 0; }
+        }
+
+        /* ========================================
+           PROJECTS SECTION - TERMINAL BOXES
+        ======================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-terminal {
+            border: 2px solid var(--color-fg);
+            background: rgba(0, 0, 0, 0.7);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .project-terminal:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .project-header {
+            padding: 0.8rem 1rem;
+            border-bottom: 2px solid var(--color-fg);
+            background: rgba(255, 255, 255, 0.05);
+            font-family: var(--font-terminal);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .project-display {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            border-bottom: 2px solid var(--color-fg);
+            background: rgba(255, 255, 255, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.03) 20px
+            );
+            animation: bg-scroll 20s linear infinite;
+        }
+
+/* STILE IMMAGINI PREVIEW - HACKER AESTHETIC */
+.project-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.3) brightness(0.9);
+    transition: all 0.5s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.project-terminal:hover .project-preview-img {
+    filter: grayscale(100%) contrast(1.5) brightness(1.1);
+    transform: scale(1.05);
+}
+
+/* Effetto glitch sull'immagine al hover */
+.project-preview-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+    );
+    pointer-events: none;
+}
+
+
+        @keyframes bg-scroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
 
         .project-content {
             padding: 1.5rem;
+            font-family: var(--font-mono);
         }
-
-
-        .project-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-primary);
-        }
-
 
         .project-description {
-            color: var(--color-text-muted);
-            margin-bottom: 1rem;
+            margin: 1rem 0;
             font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
         }
-
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin: 1rem 0;
         }
-
 
         .tech-tag {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--color-primary);
+            border: 1px solid var(--color-fg);
             padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            letter-spacing: 1px;
         }
 
-
         .project-link {
-            color: var(--color-secondary);
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--color-fg);
+            color: var(--color-fg);
             text-decoration: none;
-            font-weight: 600;
+            font-family: var(--font-terminal);
+            letter-spacing: 2px;
             transition: all 0.3s ease;
         }
 
-
         .project-link:hover {
-            color: var(--color-primary);
-            text-shadow: var(--glow-blue);
+            background: var(--color-fg);
+            color: var(--color-bg);
         }
 
-
         /* ========================================
-           CONTACT SECTION
+           CONTACT SECTION - TERMINAL FORM
         ======================================== */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
         }
 
-
-        .contact-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        .contact-form {
-            background: var(--gradient-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 20px;
+        .contact-terminal {
+            border: 2px solid var(--color-fg);
             padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
         }
 
+        .contact-terminal::before {
+            content: 'CONTACT_FORM.sh';
+            display: block;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--color-fg);
+            margin: -2rem -2rem 2rem -2rem;
+            background: rgba(255, 255, 255, 0.1);
+            font-family: var(--font-terminal);
+        }
 
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--color-text);
+            font-family: var(--font-mono);
             font-weight: 600;
         }
 
+        .form-group label::before {
+            content: '$ ';
+            opacity: 0.5;
+        }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1rem;
-            background: rgba(26, 31, 46, 0.6);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 10px;
-            color: var(--color-text);
-            font-family: 'Space Grotesk', sans-serif;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-fg);
+            color: var(--color-fg);
+            font-family: var(--font-mono);
             transition: all 0.3s ease;
         }
-
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--color-primary);
-            box-shadow: var(--glow-blue);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
-
 
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
         }
 
-
         .submit-button {
             width: 100%;
             padding: 1rem;
-            background: var(--gradient-main);
-            color: white;
-            border: none;
-            border-radius: 10px;
+            background: transparent;
+            color: var(--color-fg);
+            border: 2px solid var(--color-fg);
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
+            font-family: var(--font-terminal);
+            letter-spacing: 3px;
             transition: all 0.3s ease;
-            box-shadow: var(--glow-blue);
         }
-
 
         .submit-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+            background: var(--color-fg);
+            color: var(--color-bg);
         }
-
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
-
 
         .contact-method {
-            background: var(--gradient-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 15px;
+            border: 2px solid var(--color-fg);
             padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
+            font-family: var(--font-mono);
         }
-
 
         .contact-method:hover {
+            background: rgba(255, 255, 255, 0.05);
             transform: translateX(10px);
-            box-shadow: var(--glow-blue);
         }
-
-
-        .contact-method-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
 
         .contact-method h3 {
-            color: var(--color-primary);
             margin-bottom: 0.5rem;
+            font-family: var(--font-terminal);
+            letter-spacing: 2px;
         }
 
+        .contact-method h3::before {
+            content: '> ';
+        }
 
         .contact-method a {
-            color: var(--color-text-muted);
+            color: var(--color-fg);
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
-
         .contact-method a:hover {
-            color: var(--color-primary);
+            letter-spacing: 1px;
         }
-
 
         /* ========================================
            FOOTER
         ======================================== */
         footer {
-            background: var(--color-bg-secondary);
-            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid var(--color-fg);
             padding: 2rem;
             text-align: center;
+            font-family: var(--font-mono);
         }
-
 
         .social-links {
             display: flex;
@@ -771,59 +806,73 @@
             margin-bottom: 1rem;
         }
 
-
         .social-icon {
-            font-size: 2rem;
-            color: var(--color-text);
-            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            color: var(--color-fg);
             text-decoration: none;
+            border: 1px solid var(--color-fg);
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-terminal);
         }
-
 
         .social-icon:hover {
-            color: var(--color-primary);
-            transform: translateY(-5px) rotate(10deg);
-            text-shadow: var(--glow-blue);
+            background: var(--color-fg);
+            color: var(--color-bg);
         }
-
 
         .copyright {
-            color: var(--color-text-muted);
             font-size: 0.9rem;
+            opacity: 0.7;
         }
 
-
         /* ========================================
-           CURSOR PERSONALIZZATO
+           MUSIC TOGGLE BUTTON - TERMINAL STYLE
         ======================================== */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--color-primary);
-            border-radius: 50%;
+        #musicToggle {
             position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-
-
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(59, 130, 246, 0.5);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 2px solid var(--color-fg);
+            color: var(--color-fg);
+            font-size: 1.4rem;
+            cursor: pointer;
+            font-family: var(--font-terminal);
+            letter-spacing: 1px;
             transition: all 0.3s ease;
-            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
+            padding: 0;
         }
 
+        #musicToggle:hover {
+            background: var(--color-fg);
+            color: var(--color-bg);
+            transform: scale(1.1);
+        }
+
+        #musicToggle.playing {
+            animation: pulse-audio 2s infinite;
+        }
+
+        @keyframes pulse-audio {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            50% { 
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+        }
 
         /* ========================================
-           RESPONSIVE DESIGN
+           RESPONSIVE
         ======================================== */
         @media (max-width: 768px) {
             nav ul {
@@ -832,323 +881,429 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: rgba(26, 31, 46, 0.98);
+                background: rgba(0, 0, 0, 0.98);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 transition: left 0.3s ease;
+                border-right: 2px solid var(--color-fg);
             }
-
 
             nav ul.active {
                 left: 0;
             }
 
-
             .menu-toggle {
                 display: flex;
             }
 
-
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-
-
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -6px);
-            }
-
-
             .about-content {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
-
-
-            .avatar {
-                margin: 0 auto;
-            }
-
 
             .contact-container {
                 grid-template-columns: 1fr;
             }
 
-
-            .cursor,
-            .cursor-follower {
+            .custom-cursor {
                 display: none;
             }
-        }
 
+            .cursor-trail {
+                display: none;
+            }
 
-        /* ========================================
-           ANIMAZIONI SCROLL
-        ======================================== */
-        .hidden {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
+            #musicToggle {
+                bottom: 80px;
+                right: 15px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix-bg"></canvas>
 
-    <!-- Cursore personalizzato -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Scanline Effect -->
+    <div class="scanline"></div>
 
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor">SYSTEM</div>
 
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">DAFNE</div>
+            <div class="logo">DAFNE_TERMINAL</div>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Progetti</a></li>
-                <li><a href="#contact">Contatti</a></li>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#skills">SKILLS</a></li>
+                <li><a href="#projects">PROJECTS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
             </ul>
         </div>
     </nav>
-
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>DAFNE</h1>
-            <p class="subtitle">Frontend Developer | Milano</p>
-            <a href="#contact" class="cta-button">WELCOME</a>
+            <div class="typing-text" id="typingText"></div>
+            <a href="#contact" class="cta-button">INITIALIZE_CONTACT</a>
         </div>
     </section>
-
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title">Chi Sono</h2>
+        <h2 class="section-title">ABOUT_ME</h2>
         <div class="about-content">
-            <div class="avatar">
-                <img src="foto-dafne.jpg" alt="Dafne - Frontend Developer" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            <div class="terminal-box">
+                <div class="avatar-terminal">
+                    <img src="foto-dafne.jpg" alt="DAFNE" onerror="this.style.display='none'; this.parentElement.innerHTML='👤'">
+                </div>
             </div>
             <div class="about-text">
-                <p>Sono Dafne, appassionata di web design e sviluppo frontend</p>
-                <p>Sto imparando HTML, CSS e JavaScript per trasformare idee creative in piacevoli siti</p>
-                <p>Questo sito non è ancora un portfolio, è il mio primo lavoro che combina estetica moderna e funzionalità professionali</p>
+                <p>NOME: Dafne</p>
+                <p>ROLE: Frontend Developer</p>
+                <p>LOCATION: Milano, IT</p>
+                <p>STATUS: Learning HTML, CSS, JavaScript</p>
+                <p>MISSION: Trasformare idee creative in interfacce web funzionali</p>
+                <p>STYLE: Minimal, clean code, hacker aesthetic</p>
+                <p>NOTE: Questo portfolio è il mio primo progetto completo</p>
             </div>
         </div>
     </section>
-
 
     <!-- Skills Section -->
     <section id="skills">
-        <h2 class="section-title">Le Mie Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <span class="skill-icon">🌐</span>
-                <div class="skill-name">HTML5</div>
+        <h2 class="section-title">SKILLS</h2>
+        <div class="skills-terminal">
+            <div class="skill-item">
+                <span>HTML5</span>
+                <div class="skill-bar"></div>
             </div>
-            <div class="skill-card">
-                <span class="skill-icon">🎨</span>
-                <div class="skill-name">CSS3</div>
+            <div class="skill-item">
+                <span>CSS3</span>
+                <div class="skill-bar"></div>
             </div>
-            <div class="skill-card">
-                <span class="skill-icon">⚡</span>
-                <div class="skill-name">JavaScript</div>
+            <div class="skill-item">
+                <span>JavaScript</span>
+                <div class="skill-bar"></div>
             </div>
-            <div class="skill-card">
-                <span class="skill-icon">✨</span>
-                <div class="skill-name">GSAP</div>
+            <div class="skill-item">
+                <span>GSAP_Animations</span>
+                <div class="skill-bar"></div>
             </div>
-            <div class="skill-card">
-                <span class="skill-icon">📱</span>
-                <div class="skill-name">Responsive</div>
+            <div class="skill-item">
+                <span>Responsive_Design</span>
+                <div class="skill-bar"></div>
             </div>
-            <div class="skill-card">
-                <span class="skill-icon">🎭</span>
-                <div class="skill-name">Figma</div>
+            <div class="skill-item">
+                <span>Figma_UI/UX</span>
+                <div class="skill-bar"></div>
             </div>
         </div>
     </section>
-
 
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">I Miei Progetti</h2>
+        <h2 class="section-title">PROJECTS_ARCHIVE</h2>
         <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image psicologa-mockup">
-                    <div class="shine"></div>
-                </div>
+            <div class="project-terminal">
+                <div class="project-header">PSICOLOGA_WEBSITE.exe</div>
+   <div class="project-display">
+    <img src="previews/canvas2.png" alt="Psicologa Website" class="project-preview-img">
+</div>
                 <div class="project-content">
-                    <h3 class="project-title">Sito Psicologa</h3>
-                    <p class="project-description">Sito web professionale per studio di psicologia con sezioni informative, area prenotazioni e blog integrato.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <a href="https://psicologa-zeta.vercel.app/" class="project-link" target="_blank">Vedi progetto →</a>
-                </div>
-            </div>
-
-
-            <div class="project-card">
-                <div class="project-image gioielli-mockup">
-                    <div class="shine"></div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Sito celtico amica</h3>
-                    <p class="project-description">E-commerce elegante per gioielli artigianali con galleria fotografica professionale e carrello acquisti.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">CSS Grid</span>
-                        <span class="tech-tag">Animations</span>
-                    </div>
-                    <a href="https://lugh-aisling-art.vercel.app/" class="project-link" target="_blank">Vedi progetto →</a>
-                </div>
-            </div>
-
-
-
-            <div class="project-card">
-                <div class="project-image veterinario-mockup">
-                    <div class="shine"></div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Sito Veterinario</h3>
-                    <p class="project-description">Portale completo per clinica veterinaria con sistema di prenotazioni online, galleria servizi e consigli per pet.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Forms</span>
-                    </div>
-                    <a href="https://dafne-veterinario.example.com" class="project-link" target="_blank">Vedi progetto →</a>
-                </div>
-            </div>
-
-
-
-            <div class="project-card">
-                <div class="project-image bar-mockup">
-                    <div class="shine"></div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Sito Bar</h3>
-                    <p class="project-description">Landing page moderna per cocktail bar con menu interattivo, eventi in programma e sistema di prenotazione tavoli.</p>
+                    <p class="project-description">Sistema web professionale per studio psicologico. Include area prenotazioni, blog integrato e sezioni informative.</p>
                     <div class="project-tech">
                         <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">Animations</span>
-                        <span class="tech-tag">Responsive</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JAVASCRIPT</span>
                     </div>
-                    <a href="https://dafne-bar.example.com" class="project-link" target="_blank">Vedi progetto →</a>
+                    <a href="https://psicologa-zeta.vercel.app/" class="project-link" target="_blank">ACCESS_PROJECT</a>
+                </div>
+            </div>
+
+            <div class="project-terminal">
+                <div class="project-header">VETERINARIO_PORTAL.exe</div>
+                <div class="project-display">🐾</div>
+                <div class="project-content">
+                    <p class="project-description">Portale completo per clinica veterinaria con sistema booking online, galleria servizi e consigli pet care.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">FORMS</span>
+                    </div>
+                    <a href="https://dafne-veterinario.example.com" class="project-link" target="_blank">ACCESS_PROJECT</a>
+                </div>
+            </div>
+
+            <div class="project-terminal">
+                <div class="project-header">MEDIEVAL_STORE.exe</div>
+          <div class="project-display">
+    <img src="previews/canvas.png" alt="Medieval Store Preview" class="project-preview-img">
+</div>
+                <div class="project-content">
+                    <p class="project-description">E-commerce elegante per gioielli e lavorazioni artigianali.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JAVASCRIPT</span>
+                        <span class="tech-tag">CSS_GRID</span>
+                        <span class="tech-tag">ANIMATIONS</span>
+                    </div>
+                    <a href="https://lugh-aisling-art.vercel.app/" class="project-link" target="_blank">ACCESS_PROJECT</a>
+                </div>
+            </div>
+
+            <div class="project-terminal">
+                <div class="project-header">COCKTAIL_BAR.exe</div>
+                <div class="project-display">🍸</div>
+                <div class="project-content">
+                    <p class="project-description">Landing page moderna per cocktail bar. Menu interattivo, calendario eventi e sistema prenotazione tavoli.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">ANIMATIONS</span>
+                        <span class="tech-tag">RESPONSIVE</span>
+                    </div>
+                    <a href="https://dafne-bar.example.com" class="project-link" target="_blank">ACCESS_PROJECT</a>
                 </div>
             </div>
         </div>
     </section>
 
-
     <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title">Contatti</h2>
+        <h2 class="section-title">CONTACT_PROTOCOL</h2>
         <div class="contact-container">
-            <div class="contact-form">
+            <div class="contact-terminal">
                 <form action="https://formspree.io/f/xjgrryly" method="POST">
                     <div class="form-group">
-                        <label for="name">Nome</label>
+                        <label for="name">USERNAME</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">EMAIL_ADDRESS</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Messaggio</label>
+                        <label for="message">MESSAGE_CONTENT</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit" class="submit-button">Invia Messaggio</button>
+                    <button type="submit" class="submit-button">SEND_MESSAGE</button>
                 </form>
             </div>
 
-
             <div class="contact-info">
                 <div class="contact-method">
-                    <div class="contact-method-icon">📧</div>
-                    <h3>Email</h3>
-                    <a href="mailto:dafne88b@gmail.com">dafne88b@gmail.com</a>
+                    <h3>EMAIL_PROTOCOL</h3>
+                    <a href="mailto:←――――――――――――――">←――――――――――――――</a>
                 </div>
 
-
                 <div class="contact-method">
-                    <div class="contact-method-icon">📱</div>
-                    <h3>WhatsApp</h3>
+                    <h3>WHATSAPP_CHANNEL</h3>
                     <a href="https://wa.me/**********" target="_blank">+39 *** *** ***</a>
                 </div>
 
-
                 <div class="contact-method">
-                    <div class="contact-method-icon">📸</div>
-                    <h3>Instagram</h3>
+                    <h3>INSTAGRAM_FEED</h3>
                     <a href="https://instagram.com/dafnebettera" target="_blank">@dafnebettera</a>
                 </div>
             </div>
         </div>
     </section>
 
-
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="https://www.youtube.com/@dafneb5342/shorts" class="social-icon" target="_blank">▶️</a>
-            <a href="https://github.com/Dafne5342" class="social-icon" target="_blank">🔗</a>
-            <a href="https://www.linkedin.com/in/dafne-bettera-1367711a2" class="social-icon" target="_blank">💼</a>
+            <a href="https://www.youtube.com/@dafneb5342/shorts" class="social-icon" target="_blank">YOUTUBE</a>
+            <a href="https://github.com/Dafne5342" class="social-icon" target="_blank">GITHUB</a>
+            <a href="https://www.linkedin.com/in/dafne-bettera-1367711a2" class="social-icon" target="_blank">LINKEDIN</a>
         </div>
-        <p class="copyright">&copy; 2026 Dafne - Frontend Developer | Fatto con 💙 a Milano</p>
+        <p class="copyright">© 2026 DAFNE_TERMINAL // FRONTEND_DEVELOPER // MILANO_IT</p>
     </footer>
 
+    <!-- Music Toggle Button -->
+    <button id="musicToggle" title="Audio Control">▶</button>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="mr_robot.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         // ========================================
-        // MENU MOBILE TOGGLE
+        // MATRIX BACKGROUND ANIMATION
+        // ========================================
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ========================================
+        // TYPING ANIMATION
+        // ========================================
+        const texts = [
+            'FRONTEND_DEVELOPER // MILANO',
+            'SYSTEM.INITIALIZE()',
+            'CODE.EXECUTE()',
+            'WELCOME.TO.MY.WORLD()'
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        const typingElement = document.getElementById('typingText');
+
+        function typeWriter() {
+            if (charIndex < texts[textIndex].length) {
+                typingElement.textContent += texts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            } else {
+                setTimeout(() => {
+                    charIndex = 0;
+                    typingElement.textContent = '';
+                    textIndex = (textIndex + 1) % texts.length;
+                    typeWriter();
+                }, 2000);
+            }
+        }
+
+        typeWriter();
+
+        // ========================================
+        // CUSTOM CURSOR CON PAROLE
+        // ========================================
+        const cursorWords = ['SYSTEM', 'CODE', 'TERMINAL', 'EXECUTE', 'ACCESS', 'PROTOCOL', 'MATRIX', 'DIGITAL', 'CYBER', 'HACK'];
+        let currentWordIndex = 0;
+        const cursor = document.getElementById('customCursor');
+        let cursorX = 0;
+        let cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            cursor.style.left = cursorX + 15 + 'px';
+            cursor.style.top = cursorY + 15 + 'px';
+        });
+
+        // Cambia parola ogni 2 secondi
+        setInterval(() => {
+            currentWordIndex = (currentWordIndex + 1) % cursorWords.length;
+            cursor.textContent = cursorWords[currentWordIndex];
+        }, 2000);
+
+        // Trails del cursore
+        for (let i = 0; i < 5; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            
+            let trailX = 0;
+            let trailY = 0;
+            
+            setInterval(() => {
+                trailX += (cursorX - trailX) * (0.1 / (i + 1));
+                trailY += (cursorY - trailY) * (0.1 / (i + 1));
+                trail.style.left = trailX + 'px';
+                trail.style.top = trailY + 'px';
+                trail.style.opacity = 1 - (i * 0.15);
+            }, 50);
+        }
+
+        // ========================================
+        // MUSIC CONTROL
+        // ========================================
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+
+        if (musicToggle && bgMusic) {
+            bgMusic.volume = 0.3;
+
+            // Riprendi musica da localStorage
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                document.addEventListener('click', function unlockOnce() {
+                    bgMusic.play().catch(() => {});
+                    musicToggle.classList.add('playing');
+                    musicToggle.textContent = '⏸';
+                    document.removeEventListener('click', unlockOnce);
+                }, { once: true });
+            }
+
+            musicToggle.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play().then(() => {
+                        musicToggle.classList.add('playing');
+                        musicToggle.textContent = '⏸';
+                        localStorage.setItem('musicPlaying', 'true');
+                    }).catch(err => {
+                        console.log("Autoplay bloccato:", err);
+                    });
+                } else {
+                    bgMusic.pause();
+                    musicToggle.classList.remove('playing');
+                    musicToggle.textContent = '▶';
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            });
+        }
+
+        // ========================================
+        // MOBILE MENU
         // ========================================
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
 
-
         menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-
-        // Chiudi menu quando clicco su un link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
 
-
         // ========================================
-        // SMOOTH SCROLL PERSONALIZZATO
+        // SMOOTH SCROLL
         // ========================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1163,220 +1318,19 @@
             });
         });
 
-
         // ========================================
-        // INTERSECTION OBSERVER - ANIMAZIONI SCROLL
+        // CONSOLE ART
         // ========================================
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-
-        // Osserva tutti gli elementi con animazioni
-        document.querySelectorAll('.about-content, .skills-grid, .projects-grid, .contact-container').forEach(el => {
-            observer.observe(el);
-        });
-
+        console.log(`
+        ██████╗  █████╗ ███████╗███╗   ██╗███████╗
+        ██╔══██╗██╔══██╗██╔════╝████╗  ██║██╔════╝
+        ██║  ██║███████║█████╗  ██╔██╗ ██║█████╗  
+        ██║  ██║██╔══██║██╔══╝  ██║╚██╗██║██╔══╝  
+        ██████╔╝██║  ██║██║     ██║ ╚████║███████╗
+        ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═══╝╚══════╝
         
-        // ========================================
-        // CURSORE PERSONALIZZATO
-        // ========================================
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-        
-        // Controlla che gli elementi esistano prima di usarli
-        if (cursor && cursorFollower) {
-            let mouseX = 0;
-            let mouseY = 0;
-            let cursorX = 0;
-            let cursorY = 0;
-            let followerX = 0;
-            let followerY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            // Animazione smooth del cursore
-            function animateCursor() {
-                cursorX = mouseX;
-                cursorY = mouseY;
-                followerX += (mouseX - followerX) * 0.1;
-                followerY += (mouseY - followerY) * 0.1;
-                
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-                cursorFollower.style.left = followerX + 'px';
-                cursorFollower.style.top = followerY + 'px';
-                
-                requestAnimationFrame(animateCursor);
-            }
-            animateCursor();
-            
-            // Effetto hover su elementi interattivi
-            document.querySelectorAll('a, button, .project-card, .skill-card').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(1.5)';
-                    cursorFollower.style.transform = 'scale(1.5)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursorFollower.style.transform = 'scale(1)';
-                });
-            });
-        }
-
-
-        // ========================================
-        // NAVBAR BACKGROUND ON SCROLL
-        // ========================================
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(26, 31, 46, 0.95)';
-                nav.style.boxShadow = '0 5px 20px rgba(59, 130, 246, 0.2)';
-            } else {
-                nav.style.background = 'rgba(26, 31, 46, 0.8)';
-                nav.style.boxShadow = 'none';
-            }
-        });
-
-
-        // ========================================
-        // LAZY LOADING IMMAGINI (se aggiungi immagini reali)
-        // ========================================
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.add('loaded');
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
-
-
-        // ========================================
-        // CONSOLE MESSAGE
-        // ========================================
-        console.log('%c💙 Ciao! Benvenuto nel mio portfolio 💙', 'color: #3b82f6; font-size: 20px; font-weight: bold;');
-        console.log('%c👩‍💻 Sviluppato con passione da Dafne', 'color: #60a5fa; font-size: 14px;');
-    </script>
-
-    <!-- ====================== -->
-    <!-- MUSICA DI SOTTOFONDO   -->
-    <!-- ====================== -->
-    <button id="musicToggle" title="Musica di sottofondo">
-        🎵
-    </button>
-
-    <audio id="bgMusic" loop>
-        <source src="cyber-bg.mp3" type="audio/mpeg">
-        Il tuo browser non supporta l'audio.
-    </audio>
-
-    <style>
-        #musicToggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(59, 131, 246, 0.075);
-            border: 2px solid var(--color-primary);
-            color: var(--color-primary);
-            font-size: 1.6rem;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            box-shadow: var(--glow-blue);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #musicToggle:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
-        }
-
-        #musicToggle.playing {
-            background: rgba(59, 130, 246, 0.4);
-            animation: pulse-slow 3s infinite;
-        }
-
-        @keyframes pulse-slow {
-            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
-            50%      { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
-        }
-
-        @media (max-width: 768px) {
-            #musicToggle {
-                bottom: 80px;
-                right: 15px;
-                width: 48px;
-                height: 48px;
-                font-size: 1.4rem;
-            }
-        }
-    </style>
-
-    <script>
-        // CONTROLLO MUSICA
-        const musicToggle = document.getElementById('musicToggle');
-        const bgMusic = document.getElementById('bgMusic');
-
-        if (musicToggle && bgMusic) {
-            bgMusic.volume = 0.3;
-
-            if (localStorage.getItem('musicPlaying') === 'true') {
-                document.addEventListener('click', function unlockOnce(e) {
-                    bgMusic.play().catch(() => {});
-                    musicToggle.classList.add('playing');
-                    musicToggle.textContent = '⏸️';
-                    document.removeEventListener('click', unlockOnce);
-                }, { once: true });
-            }
-
-            musicToggle.addEventListener('click', () => {
-                if (bgMusic.paused) {
-                    bgMusic.play().then(() => {
-                        musicToggle.classList.add('playing');
-                        musicToggle.textContent = '⏸️';
-                        localStorage.setItem('musicPlaying', 'true');
-                    }).catch(err => {
-                        console.log("Play bloccato:", err);
-                        alert("Tocca di nuovo il pulsante dopo aver cliccato qualcosa sulla pagina 😊");
-                    });
-                } else {
-                    bgMusic.pause();
-                    musicToggle.classList.remove('playing');
-                    musicToggle.textContent = '🎵';
-                    localStorage.setItem('musicPlaying', 'false');
-                }
-            });
-        }
+        SYSTEM INITIALIZED // WELCOME TO THE TERMINAL
+        `);
     </script>
 
 </body>
