@@ -913,14 +913,14 @@
                 display: none;
             }
 
-            #musicToggle {
-                bottom: 80px;
-                right: 15px;
-                width: 55px;
-                height: 55px;
-                font-size: 1.2rem;
-            }
-        }
+    #musicToggle {
+        bottom: 60px;        /* Più in basso (era 80px) */
+        right: 15px;
+        width: 45px;          /* Più piccolo (era 55px) */
+        height: 45px;         /* Più piccolo (era 55px) */
+        font-size: 1rem;      /* Testo più piccolo (era 1.2rem) */
+    }
+}
     </style>
 </head>
 <body>
@@ -1331,6 +1331,57 @@
         
         SYSTEM INITIALIZED // WELCOME TO THE TERMINAL
         `);
+
+
+
+console.log(`...ASCII ART...`);
+    </script>
+
+    <script>
+        // ========================================
+        // FIX FOOTER LINKS - FORCE CLICKABLE
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialLinks = document.querySelectorAll('.social-icon, .social-links a, footer a');
+            
+            socialLinks.forEach(link => {
+                link.style.cursor = 'pointer';
+                link.style.pointerEvents = 'auto';
+                link.style.position = 'relative';
+                link.style.zIndex = '9999';
+                
+                link.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.getAttribute('href');
+                    if (url && url !== '#') {
+                        window.open(url, '_blank');
+                    }
+                }, true);
+                
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            console.log('✅ Footer links fixed:', socialLinks.length + ' links');
+        });
+
+        const customCursor = document.getElementById('customCursor');
+        if (customCursor) {
+            customCursor.style.pointerEvents = 'none';
+        }
+        
+        document.querySelectorAll('.cursor-trail').forEach(trail => {
+            trail.style.pointerEvents = 'none';
+        });
+    </script>
+
+</body>
+</html>
     </script>
 
 </body>
