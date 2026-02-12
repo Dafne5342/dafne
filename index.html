@@ -858,9 +858,11 @@
             transform: scale(1.1);
         }
 
-        #musicToggle.playing {
-            animation: pulse-audio 2s infinite;
-        }
+#musicToggle.playing {
+    animation: pulse-audio 2s infinite;
+    background: transparent !important;  /* Forza trasparente */
+    color: var(--color-fg) !important;   /* Forza bianco */
+}
 
         @keyframes pulse-audio {
             0%, 100% { 
@@ -914,7 +916,7 @@
             }
 
     #musicToggle {
-        bottom: 70px;        /* Più in basso (era 80px) */
+        bottom: 65px;        /* Più in basso (era 80px) */
         right: 15px;
         width: 45px;          /* Più piccolo (era 55px) */
         height: 45px;         /* Più piccolo (era 55px) */
