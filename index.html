@@ -54,7 +54,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.15;
+            opacity: 0.25;
         }
 
         /* ========================================
@@ -87,28 +87,31 @@
            CUSTOM CURSOR - PAROLE CHE SI COMPONGONO
         ======================================== */
         .custom-cursor {
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--color-fg);
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-            transition: opacity 0.3s;
-            mix-blend-mode: difference;
-        }
+    position: fixed;
+    pointer-events: none;
+    z-index: 10001;
+    font-family: var(--font-terminal);
+    font-size: 16px;
+    color: #e2e0eb;
+    text-shadow: 
+        0 0 4px #d3edd9,
+        0 0 8px #bee4c7,
+        0 0 12px #000000;
+    letter-spacing: 1px;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    animation: glitch-cursor 1.2s infinite steps(1);
+}
 
-        .cursor-trail {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: var(--color-fg);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-        }
+@keyframes glitch-cursor {
+    0%, 100%   { transform: translate(-50%, -50%) skew(0deg);   opacity: 1; }
+    2%         { transform: translate(calc(-50% - 2px), -50%) skew(5deg);  opacity: 0.8; }
+    4%         { transform: translate(calc(-50% + 3px), -50%) skew(-8deg); opacity: 0.6; }
+    6%, 8%     { transform: translate(-50%, -50%) skew(0deg);   opacity: 1; }
+    10%        { transform: translate(calc(-50% - 1px), calc(-50% + 1px)); }
+    12%, 100%  { transform: translate(-50%, -50%); }
+}
 
         /* ========================================
            NAVIGATION - STILE TERMINALE
@@ -1037,20 +1040,6 @@
             </div>
 
             <div class="project-terminal">
-                <div class="project-header">VETERINARIO_PORTAL.exe</div>
-                <div class="project-display">🐾</div>
-                <div class="project-content">
-                    <p class="project-description">Portale completo per clinica veterinaria con sistema booking online, galleria servizi e consigli pet care.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">FORMS</span>
-                    </div>
-                    <a href="https://dafne-veterinario.example.com" class="project-link" target="_blank">ACCESS_PROJECT</a>
-                </div>
-            </div>
-
-            <div class="project-terminal">
                 <div class="project-header">MEDIEVAL_STORE.exe</div>
           <div class="project-display">
     <img src="canvas.png" alt="Medieval Store Preview" class="project-preview-img">
@@ -1068,7 +1057,9 @@
 
             <div class="project-terminal">
                 <div class="project-header">COCKTAIL_BAR.exe</div>
-                <div class="project-display">🍸</div>
+          <div class="project-display">
+    <img src="canvas3.png" alt="Medieval Store Preview" class="project-preview-img">
+</div>
                 <div class="project-content">
                     <p class="project-description">Landing page moderna per cocktail bar. Menu interattivo, calendario eventi e sistema prenotazione tavoli.</p>
                     <div class="project-tech">
@@ -1076,10 +1067,27 @@
                         <span class="tech-tag">ANIMATIONS</span>
                         <span class="tech-tag">RESPONSIVE</span>
                     </div>
-                    <a href="https://dafne-bar.example.com" class="project-link" target="_blank">ACCESS_PROJECT</a>
+                    <a href="pubmilano.vercel.app" class="project-link" target="_blank">ACCESS_PROJECT</a>
                 </div>
             </div>
+
+            
+            <div class="project-terminal">
+                <div class="project-header">VETERINARIO_PORTAL.exe</div>
+                <div class="project-display">🐾</div>
+                <div class="project-content">
+                    <p class="project-description">Portale completo per clinica veterinaria con sistema booking online, galleria servizi e consigli pet care.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">FORMS</span>
+                    </div>
+                    <a href="https://dafne-veterinario.example.com" class="project-link" target="_blank">ACCESS_PROJECT</a>
+                </div>
+            </div>
+
         </div>
+        
     </section>
 
     <!-- Contact Section -->
@@ -1107,7 +1115,7 @@
             <div class="contact-info">
                 <div class="contact-method">
                     <h3>EMAIL_PROTOCOL</h3>
-                    <a href="mailto:←――――――――――――――">←――――――――――――――</a>
+                    <a href="mailto:――――――――――――――">――――――――――――――</a>
                 </div>
 
                 <div class="contact-method">
@@ -1130,7 +1138,7 @@
             <a href="https://github.com/Dafne5342" class="social-icon" target="_blank">GITHUB</a>
             <a href="https://www.linkedin.com/in/dafne-bettera-1367711a2" class="social-icon" target="_blank">LINKEDIN</a>
         </div>
-        <p class="copyright">© 2026 DAFNE_TERMINAL // FRONTEND_DEVELOPER // MILANO_IT</p>
+        <p class="copyright">© 2026 DAFNE_BETTERA // FRONTEND_DEVELOPER // MILANO_IT</p>
     </footer>
 
     <!-- Music Toggle Button -->
@@ -1214,7 +1222,7 @@
         // ========================================
         // CUSTOM CURSOR CON PAROLE
         // ========================================
-        const cursorWords = ['SYSTEM', 'CODE', 'TERMINAL', 'EXECUTE', 'ACCESS', 'PROTOCOL', 'MATRIX', 'DIGITAL', 'CYBER', 'HACK'];
+        const cursorWords = ['SYSTEM', 'CODE', 'TERMINAL', 'EXECUTE', 'ACCESS', 'PROTOCOL', 'ELLIOT', 'MR.ROBOT', 'YOU ARE', 'THE UNIVERSE'];
         let currentWordIndex = 0;
         const cursor = document.getElementById('customCursor');
         let cursorX = 0;
@@ -1331,7 +1339,7 @@
         ██████╔╝██║  ██║██║     ██║ ╚████║███████╗
         ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═══╝╚══════╝
         
-        SYSTEM INITIALIZED // WELCOME TO THE TERMINAL
+        SYSTEM INITIALIZED // WELCOME TO MY TERMINAL
         `);
 
 
